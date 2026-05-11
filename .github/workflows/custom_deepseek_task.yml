@@ -34,8 +34,11 @@ on:
         type: boolean
 
 concurrency:
-  group: custom-deepseek-task
+  group: custom-deepseek-task-${{ github.ref }}
   cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   run-custom-task:
@@ -54,6 +57,10 @@ jobs:
         run: |
           if [ -z "${OPENAI_API_KEY}" ]; then
             echo "❌ 未配置 OPENAI_API_KEY，请在 Settings → Secrets and variables → Actions 新增仓库密钥。"
+            exit 1
+          fi
+          if ! echo "${OPENAI_BASE_URL}" | grep -Eq '^https://[^[:space:]]+$'; then
+            echo "❌ openai_base_url 必须是 https URL。"
             exit 1
           fi
 

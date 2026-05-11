@@ -23,7 +23,7 @@ on:
         default: "deepseek-v4-pro"
         type: string
       openai_base_url:
-        description: "OpenAI-compatible Base URL"
+        description: "OpenAI-compatible Base URL（仅校验 https 格式，实际连通性在运行时验证）"
         required: true
         default: "https://api.deepseek.com"
         type: string
@@ -43,7 +43,7 @@ permissions:
 jobs:
   run-custom-task:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_BASE_URL: ${{ github.event.inputs.openai_base_url }}

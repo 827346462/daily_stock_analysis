@@ -23,7 +23,7 @@ on:
         default: "deepseek-v4-pro"
         type: string
       openai_base_url:
-        description: "OpenAI 兼容 Base URL（仅校验 HTTPS 与主机名格式，连通性在任务执行阶段由 API 调用验证）"
+        description: "OpenAI 兼容 Base URL（仅校验 HTTPS 与主机名格式，连通性在任务执行阶段首次 API 请求时验证）"
         required: true
         default: "https://api.deepseek.com"
         type: string
@@ -80,6 +80,7 @@ jobs:
           try:
               ipaddress.ip_address(host)
           except ValueError:
+              # 非 IP 主机名必须是标准多级域名格式；单标签主机名（如 localhost）不允许
               hostname_pattern = re.compile(
                   r"^(?=.{1,253}$)(?:[A-Za-z0-9]"
                   r"(?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+"

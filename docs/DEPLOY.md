@@ -408,8 +408,8 @@ git push -u origin main
 | `ANTHROPIC_API_KEY` | Anthropic API Key | 可选 |
 | `GEMINI_API_KEY` | Gemini AI API Key | 可选 |
 | `OPENAI_API_KEY` | OpenAI 兼容 API Key | 可选 |
-| `OPENAI_BASE_URL` | OpenAI 兼容 Base URL（DeepSeek 可填 `https://api.deepseek.com`） | 定制任务建议 |
-| `OPENAI_MODEL` | OpenAI 兼容模型名（如 `deepseek-v4-pro`） | 定制任务建议 |
+| `OPENAI_BASE_URL` | OpenAI 兼容 Base URL（DeepSeek 可填 `https://api.deepseek.com`） | 定制任务必需 |
+| `OPENAI_MODEL` | OpenAI 兼容模型名（如 `deepseek-v4-pro`） | 定制任务必需 |
 | `WECHAT_WEBHOOK_URL` | 企业微信机器人 Webhook | 可选* |
 | `FEISHU_WEBHOOK_URL` | 飞书机器人 Webhook | 可选* |
 | `TELEGRAM_BOT_TOKEN` | Telegram Bot Token | 可选* |

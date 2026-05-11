@@ -357,8 +357,8 @@ Add these Secrets:
 | `ANTHROPIC_API_KEY` | Anthropic API Key | Optional |
 | `GEMINI_API_KEY` | Gemini AI API Key | Optional |
 | `OPENAI_API_KEY` | OpenAI-compatible API Key | Optional |
-| `OPENAI_BASE_URL` | OpenAI-compatible Base URL (for DeepSeek use `https://api.deepseek.com`) | Required for custom task |
-| `OPENAI_MODEL` | OpenAI-compatible model name (e.g. `deepseek-v4-pro`) | Required for custom task |
+| `OPENAI_BASE_URL` | OpenAI-compatible Base URL (runtime input for custom task, default `https://api.deepseek.com`) | Optional |
+| `OPENAI_MODEL` | OpenAI-compatible model name (runtime input for custom task, default `deepseek-v4-pro`) | Optional |
 | `WECHAT_WEBHOOK_URL` | WeChat Work Bot Webhook | Optional* |
 | `FEISHU_WEBHOOK_URL` | Feishu Bot Webhook | Optional* |
 | `TELEGRAM_BOT_TOKEN` | Telegram Bot Token | Optional* |

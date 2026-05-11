@@ -23,7 +23,7 @@ on:
         default: "deepseek-v4-pro"
         type: string
       openai_base_url:
-        description: "OpenAI 兼容 Base URL（仅校验 HTTPS 与主机名格式，连通性在任务执行阶段首次 API 请求时验证）"
+        description: "OpenAI 兼容 Base URL（默认 DeepSeek 官方地址）"
         required: true
         default: "https://api.deepseek.com"
         type: string
@@ -87,7 +87,7 @@ jobs:
                   r"[A-Za-z]{2,63}$"
               )
               if not hostname_pattern.match(host):
-                  print("❌ openai_base_url 主机名格式无效。")
+                  print("❌ openai_base_url 主机名格式无效（需为多级域名或 IP 地址）。")
                   sys.exit(1)
           PY
 

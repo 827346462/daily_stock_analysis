@@ -23,7 +23,7 @@ on:
         default: "deepseek-v4-pro"
         type: string
       openai_base_url:
-        description: "OpenAI-compatible Base URL（仅校验 https 格式，实际连通性在运行时验证）"
+        description: "OpenAI-compatible Base URL（仅校验 HTTPS 格式，实际连通性在运行时验证）"
         required: true
         default: "https://api.deepseek.com"
         type: string
@@ -60,7 +60,7 @@ jobs:
             exit 1
           fi
           if ! echo "${OPENAI_BASE_URL}" | grep -Eq '^https://[^[:space:]]+$'; then
-            echo "❌ openai_base_url 必须是 https URL。"
+            echo "❌ openai_base_url 必须是 HTTPS URL。"
             exit 1
           fi
 

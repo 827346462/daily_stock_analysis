@@ -71,10 +71,13 @@ jobs:
           host = parsed.hostname or ""
 
           if parsed.scheme.lower() != "https":
-              print("❌ openai_base_url 必须使用 HTTPS 协议。")
+              print("❌ openai_base_url 必须使用 HTTPS 协议 (HTTPS is required).")
               sys.exit(1)
           if not parsed.netloc or parsed.username or parsed.password or " " in url:
-              print("❌ openai_base_url 格式无效。")
+              print("❌ openai_base_url 格式无效 (invalid URL format).")
+              sys.exit(1)
+          if any(ord(ch) > 127 for ch in host):
+              print("❌ openai_base_url 主机名仅支持 ASCII 字符 (ASCII hostname only).")
               sys.exit(1)
 
           try:
@@ -87,7 +90,7 @@ jobs:
                   r"[A-Za-z]{2,63}$"
               )
               if not hostname_pattern.match(host):
-                  print("❌ openai_base_url 主机名格式无效（需为多级域名或 IP 地址）。")
+                  print("❌ openai_base_url 主机名格式无效（需为多级域名或 IP 地址）(invalid hostname; use FQDN or IP).")
                   sys.exit(1)
           PY
 

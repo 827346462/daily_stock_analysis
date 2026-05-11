@@ -408,6 +408,8 @@ git push -u origin main
 | `ANTHROPIC_API_KEY` | Anthropic API Key | 可选 |
 | `GEMINI_API_KEY` | Gemini AI API Key | 可选 |
 | `OPENAI_API_KEY` | OpenAI 兼容 API Key | 可选 |
+| `OPENAI_BASE_URL` | OpenAI 兼容 Base URL（DeepSeek 可填 `https://api.deepseek.com`） | 定制任务建议 |
+| `OPENAI_MODEL` | OpenAI 兼容模型名（如 `deepseek-v4-pro`） | 定制任务建议 |
 | `WECHAT_WEBHOOK_URL` | 企业微信机器人 Webhook | 可选* |
 | `FEISHU_WEBHOOK_URL` | 飞书机器人 Webhook | 可选* |
 | `TELEGRAM_BOT_TOKEN` | Telegram Bot Token | 可选* |
@@ -449,6 +451,18 @@ git push
    - `full` - 完整分析（股票+大盘）
    - `market-only` - 仅大盘复盘
    - `stocks-only` - 仅股票分析
+5. 点击绿色 **"Run workflow"** 按钮
+
+#### 4.1 运行定制任务（DeepSeek v4 Pro）
+
+1. 打开仓库页面 → **Actions** 标签
+2. 选择 **"定制执行任务（DeepSeek）"** workflow
+3. 点击 **"Run workflow"**
+4. 按需设置：
+   - `model`：默认 `deepseek-v4-pro`
+   - `openai_base_url`：默认 `https://api.deepseek.com`
+   - `stocks`：自定义股票列表
+   - `run_mode`：任务模式（`full` / `stocks-only` / `market-only`）
 5. 点击绿色 **"Run workflow"** 按钮
 
 #### 5. 查看执行日志

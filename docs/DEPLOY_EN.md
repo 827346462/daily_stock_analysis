@@ -357,6 +357,8 @@ Add these Secrets:
 | `ANTHROPIC_API_KEY` | Anthropic API Key | Optional |
 | `GEMINI_API_KEY` | Gemini AI API Key | Optional |
 | `OPENAI_API_KEY` | OpenAI-compatible API Key | Optional |
+| `OPENAI_BASE_URL` | OpenAI-compatible Base URL (for DeepSeek use `https://api.deepseek.com`) | Recommended for custom task |
+| `OPENAI_MODEL` | OpenAI-compatible model name (e.g. `deepseek-v4-pro`) | Recommended for custom task |
 | `WECHAT_WEBHOOK_URL` | WeChat Work Bot Webhook | Optional* |
 | `FEISHU_WEBHOOK_URL` | Feishu Bot Webhook | Optional* |
 | `TELEGRAM_BOT_TOKEN` | Telegram Bot Token | Optional* |
@@ -396,6 +398,18 @@ git push
    - `full` - Full analysis (stocks + market)
    - `market-only` - Market review only
    - `stocks-only` - Stock analysis only
+5. Click green **"Run workflow"** button
+
+#### 4.1 Run custom task (DeepSeek v4 Pro)
+
+1. Go to repo page → **Actions** tab
+2. Select **"定制执行任务（DeepSeek）"** workflow
+3. Click **"Run workflow"**
+4. Set values as needed:
+   - `model`: default `deepseek-v4-pro`
+   - `openai_base_url`: default `https://api.deepseek.com`
+   - `stocks`: custom stock list
+   - `run_mode`: `full` / `stocks-only` / `market-only`
 5. Click green **"Run workflow"** button
 
 #### 5. View Execution Logs

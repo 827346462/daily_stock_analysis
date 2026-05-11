@@ -23,7 +23,7 @@ on:
         default: "deepseek-v4-pro"
         type: string
       openai_base_url:
-        description: "OpenAI 兼容 Base URL（仅校验 HTTPS 格式，实际连通性在运行时验证）"
+        description: "OpenAI 兼容 Base URL（仅校验 HTTPS 与主机名格式，连通性在任务执行阶段由 API 调用验证）"
         required: true
         default: "https://api.deepseek.com"
         type: string
@@ -62,6 +62,7 @@ jobs:
           python - <<'PY'
           import ipaddress
           import os
+          import re
           import sys
           from urllib.parse import urlparse
 
@@ -79,7 +80,12 @@ jobs:
           try:
               ipaddress.ip_address(host)
           except ValueError:
-              if "." not in host or host.startswith(".") or host.endswith("."):
+              hostname_pattern = re.compile(
+                  r"^(?=.{1,253}$)(?:[A-Za-z0-9]"
+                  r"(?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+"
+                  r"[A-Za-z]{2,63}$"
+              )
+              if not hostname_pattern.match(host):
                   print("❌ openai_base_url 主机名格式无效。")
                   sys.exit(1)
           PY

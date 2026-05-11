@@ -403,7 +403,7 @@ git push
 #### 4.1 Run custom task (DeepSeek v4 Pro)
 
 1. Go to repo page → **Actions** tab
-2. Select **"定制执行任务（DeepSeek）"** workflow
+2. Select **"定制执行任务（DeepSeek）"** workflow (Custom Execution Task (DeepSeek))
 3. Click **"Run workflow"**
 4. Set values as needed:
    - `model`: default `deepseek-v4-pro`

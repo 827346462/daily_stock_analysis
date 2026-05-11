@@ -18,12 +18,12 @@ on:
         default: "600519"
         type: string
       model:
-        description: "OpenAI-compatible 模型名（默认 deepseek-v4-pro）"
+        description: "OpenAI 兼容模型名（默认 deepseek-v4-pro）"
         required: true
         default: "deepseek-v4-pro"
         type: string
       openai_base_url:
-        description: "OpenAI-compatible Base URL（仅校验 HTTPS 格式，实际连通性在运行时验证）"
+        description: "OpenAI 兼容 Base URL（仅校验 HTTPS 格式，实际连通性在运行时验证）"
         required: true
         default: "https://api.deepseek.com"
         type: string
@@ -59,10 +59,30 @@ jobs:
             echo "❌ 未配置 OPENAI_API_KEY，请在 Settings → Secrets and variables → Actions 新增仓库密钥。"
             exit 1
           fi
-          if ! echo "${OPENAI_BASE_URL}" | grep -Eq '^https://[^[:space:]]+$'; then
-            echo "❌ openai_base_url 必须是 HTTPS URL。"
-            exit 1
-          fi
+          python - <<'PY'
+          import ipaddress
+          import os
+          import sys
+          from urllib.parse import urlparse
+
+          url = os.getenv("OPENAI_BASE_URL", "").strip()
+          parsed = urlparse(url)
+          host = parsed.hostname or ""
+
+          if parsed.scheme.lower() != "https":
+              print("❌ openai_base_url 必须使用 HTTPS 协议。")
+              sys.exit(1)
+          if not parsed.netloc or parsed.username or parsed.password or " " in url:
+              print("❌ openai_base_url 格式无效。")
+              sys.exit(1)
+
+          try:
+              ipaddress.ip_address(host)
+          except ValueError:
+              if "." not in host or host.startswith(".") or host.endswith("."):
+                  print("❌ openai_base_url 主机名格式无效。")
+                  sys.exit(1)
+          PY
 
       - name: 检出代码
         uses: actions/checkout@v5
